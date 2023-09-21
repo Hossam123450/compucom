@@ -2,7 +2,7 @@
 
 {% block title %}Log in!{% endblock %}
 
-{% block body %}
+{% block corpDuDocument %}
 <section class="container my-3">
     <div class="row">
         <div class="col">
@@ -27,7 +27,7 @@
                        value="{{ csrf_token('authenticate') }}"
                 >
             
-                <button class="btn btn-lg btn-primary mt-3" type="submit">
+                <button class="btn btn-lg btn-primary mt-3" type="submit" >
                     Sign in
                 </button>
             </form>

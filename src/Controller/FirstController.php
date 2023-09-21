@@ -12,8 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FirstController extends AbstractController
 {
-    #[Route('/template', name: 'template')]
-    public function template(ManagerRegistry $doctrine,Request $request):Response
+    #[Route('/contact', name: 'contact')]
+    public function contact(ManagerRegistry $doctrine,Request $request):Response
     {
         
        $contact=new Contact();
@@ -25,7 +25,7 @@ class FirstController extends AbstractController
         $manager->flush();
         
        }
-        return $this->render('template.html.twig',[
+        return $this->render('contact.html.twig',[
             'form'=>$form->createView()
         ]);
     }

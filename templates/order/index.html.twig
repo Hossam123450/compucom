@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block corpDuDocument %}
+<div class="d-none d-lg-block bg-secondary position-fixed top-0 start-0 h-100" style="width: 52.5%;"></div>
+<div class="container position-relative zindex-2 pt-5 pb-lg-5 pb-md-4 pb-2">
+    <div class="row">
+        <div class="col-lg-6">
+            <nav aria-label="breadcrumb">
+                <ol class="mt-5 pt-lg-3 pb-md-1 pb-lg-3 breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{path('app_home')}}">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="{{path('app_product')}}">Shop</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Création de la commande</li>
+                </ol>
+            </nav>
+            {{form_start(form,{action:path('order_prepare')})}}
+            <h1 class="h2 pb-2">Création de la commande</h1>
+            <h3 class="fs-base fw-normal text-body text-uppercase pb-1 pb-sm-1">1.
+                <span class="text-decoration-underline ms-1">Shipping details</span>
+            </h3>
+            <p>Si vous n'avez d'adresse ajouter en une dans votre espace compte <a href="#">Ajouter une adresse</a></p>
+            <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">2.<span class"text-decoration-underline ms-1">Choisir votre livraison</span></h3>
+            {{form_row(form.addresses)|replace({'[-br]':'</br>'})|raw}}
+            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">3.<span class="text-decoration-underline ms-1">Mode de livraison</span></h3>
+            {{form_row(form.transporter)|replace({'[-br]':'</br>'})|raw}}
+            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">4.<span class="text-decoration-underline ms-1">Mode de payment</span></h3>
+            {{form_row(form.payment)}}
+        </div>
+        <div class="col-lg-5 offset-lg-1 pt-1">
+            <h2 class="pb-2 pt-md-2 my-4 mt-lg-5">Récapitulatif de la commande <span class='fs-base fw-normal text-muted'>({{recapCart|length}} produits)</span><h2>
+            {% set total=null%}
+            {% for product in recapCart %}
+                {% set total=total+(product.product.price*product.quantity)%}
+                <div class="d-sm-flex align-items-center border-top py-4">
+                    <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-xl-3 mb-2 mb-sm-0" href="shop-single.html">
+                        <img src="{{vich_uploader_asset(product.product,'attachmentFile')}}" width="80" height="80" alt="{{product.product.title}}"></a>
+                    <div class="w-100 pt-1 ps-sm-4">
+                        <div class="d-block">
+                            <div class="me-3" style="position:relative;top:15px;">
+                                <h3 class="h5 mb-2"><a href="shop-single.html">{{product.product.title}}</a></h3>
+                                <p>{{product.product.subtitle}}</p>
+                            </div>
+                            <div>
+                                <p class="mb-2">Quantité : x{{product.quantity}} - Prix du produit: {{(product.product.price/100)|number_format(2,',','.')}} eur</p>
+                            </div>
+                        </div>
+                        <div class="nav justify-content-end mt-n4">
+                            <a class="nav-link fs-xl p-2" href="{{path('cart_remove',{id:product.product.id})}}" data-bs-toggle="tooltip" title="Remove">
+                                <i class="ai-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="d-flex align-items-center justify-content-between border-top fs-xl pt-4 mb-4">
+                Total:<span class="fs-3 fw-semibold text-dark ms-2">{{(total/100)|number_format(2,',','.')}} eur</span>
+            </div>
+            <div class="mt-5 text-center">
+                <button class="btn btn-lg btn-primary" type="submit" style="border-radius:6px;position:relative;top:20px;">Valider votre commande</button>
+            </div>
+        </div>
+    </div>
+    {{form_end(form)}}
+</div>
+                           
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block corpDuDocument %}
+    <h1>Products</h1>
+    {% for product in products %}
+        <h1>{{product.title}}<h1>
+        <strong>{{(product.price/100)|number_format(2,',','.')}}EUR</strong>
+        <p>{{product.subtitle}}</p>
+        <img src="{{vich_uploader_asset(product,'attachmentFile')}}" width="110" alt="Product">
+        <a href='{{path('cart_add',{id: product.id})}}'>Add to cart</a>
+        <hr>
+    {% endfor %}
+{% endblock %}

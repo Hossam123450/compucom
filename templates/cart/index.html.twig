@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block corpDuDocument %}
+    <main class="page-wrapper">
+        {% if cart|length > 0 %}
+            <div class="container position-relative zindex-2 pt-5 pb-lg-5 pb-md-4 pb-2">
+                <form action="{{path('order_index')}}">
+                <div class="row">
+                    <div class="col-lg-12 offset-lg-1 pt-1">
+                        <h2 class="pt-md-2 my-4 mt-lg-5">Mon panier</h2>
+                        <p>Ajouter d'autre articles disponibles sur le site <a href="{{path('app_product')}}">Voir les articles</a></p>
+                        <a href="{{path('cart_removeAll')}}">Supprimer tout mon panier</a>
+                        {% set total = null %}
+                        {% for item in cart %}
+                        {% set total = total + (item.product.price * item.quantity) %}
+                        <div class="d-sm-flex align-items-center border-top py-4">
+                            <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-xl-3 mb-2 mb-sm-0" href="#">
+                                <img src="{{vich_uploader_asset(item.product,'attachmentFile')}}" width="110" alt="Product">
+                            </a>
+                            <div class="w-100 pt-1 ps-sm-4">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <h3 class="h5 mb-2"><a href="#">{{item.product.title}}</a></h3>
+                                        <p class="mb-2">{{item.product.subtitle}}</p>
+                                    </div>
+                                    <div class="text-end ms-auto">
+                                        <div class="fs-5 mb-2">{{(item.product.price/100)|number_format(2,',','.')}} eur</div>
+                                    </div>
+                                </div>
+                                <div class="count-input ms-n3">
+                                    <a href="{{path('cart_decrease',{id: item.product.id})}}" class="btn btn-icon fs-xl" data-decrement>-</a>
+                                    <input class="form-control" type="number" value="{{ item.quantity}}" readonly>
+                                    <a href="{{path('cart_add',{id: item.product.id})}}" class="btn btn-icon fs-xl" data-increment>+</a>
+                                </div>
+                                <div class="nav justify-content-end mt-n5 mt-sm-n3">
+                                    <a class="nav-link fs-xl p-2" href="{{path('cart_remove',{id: item.product.id})}}" data-bs-toggle="tooltip" title="Remove">
+                                        <i class="bi bi-trash" style="font-size:24px"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        {% endfor%}
+                        <ul class="list-unstyled py-3 mb-0">
+                            <li class="d-flex justify-content-between mb-2">Nombre de produit:<span class="fw-semibold ms-2">{{cart|length}}</span></li>
+                        </ul>
+                        <div class="d-flex align-items-center justify-content-between border-top fs-xl pt-4">
+                            Total:<span class="fs-3 fw-semibold text-dark ms-2">{{(total/100)|number_format(2,',','.')}} eur</span>
+                        </div>
+                        <button class="btn btn-lg btn-primary w-100 w-sm-auto mt-4" type="submit">Valider mon panier</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+
+        {% else %}
+        <div class="container d-flex flex-column justify-content-center min-vh-100 py-5">
+            <div class="text-center pt-4 mt-lg-2">
+                <h1 class="display-5">Votre panier est vide</h1>
+                <p class="fs-lg pb-2 pb-md-0 mb-4 mb-md-5">Commencez votre shopping dès maintenant à travers nos articles</p>
+                <a class="btn btn-lg btn-primary" href="{{path('app_product')}}">Voir les produits</a>
+            </div>
+        </div>
+
+        {% endif %}
+    </main>
+{% endblock %}
