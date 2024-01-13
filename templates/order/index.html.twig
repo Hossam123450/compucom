@@ -1,27 +1,54 @@
-{% extends 'base.html.twig' %}
-{% block corpDuDocument %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Compucom</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Gp
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
 <div class="d-none d-lg-block bg-secondary position-fixed top-0 start-0 h-100" style="width: 52.5%;"></div>
 <div class="container position-relative zindex-2 pt-5 pb-lg-5 pb-md-4 pb-2">
     <div class="row">
         <div class="col-lg-6">
-            <nav aria-label="breadcrumb">
-                <ol class="mt-5 pt-lg-3 pb-md-1 pb-lg-3 breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{path('app_home')}}">Accueil</a></li>
-                    <li class="breadcrumb-item"><a href="{{path('app_product')}}">Shop</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Création de la commande</li>
-                </ol>
-            </nav>
             {{form_start(form,{action:path('order_prepare')})}}
             <h1 class="h2 pb-2">Création de la commande</h1>
-            <h3 class="fs-base fw-normal text-body text-uppercase pb-1 pb-sm-1">1.
-                <span class="text-decoration-underline ms-1">Shipping details</span>
-            </h3>
-            <p>Si vous n'avez d'adresse ajouter en une dans votre espace compte <a href="#">Ajouter une adresse</a></p>
-            <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">2.<span class"text-decoration-underline ms-1">Choisir votre livraison</span></h3>
+            <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">1.<span class"text-decoration-underline ms-1">Choisir votre livraison</span></h3>
             {{form_row(form.addresses)|replace({'[-br]':'</br>'})|raw}}
-            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">3.<span class="text-decoration-underline ms-1">Mode de livraison</span></h3>
+            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">2.<span class="text-decoration-underline ms-1">Mode de livraison</span></h3>
             {{form_row(form.transporter)|replace({'[-br]':'</br>'})|raw}}
-            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">4.<span class="text-decoration-underline ms-1">Mode de payment</span></h3>
+            <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-sm-3">3.<span class="text-decoration-underline ms-1">Mode de payment</span></h3>
             {{form_row(form.payment)}}
         </div>
         <div class="col-lg-5 offset-lg-1 pt-1">
@@ -61,5 +88,5 @@
     {{form_end(form)}}
 </div>
                            
+</body>
 
-{% endblock %}

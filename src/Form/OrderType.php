@@ -21,7 +21,6 @@ class OrderType extends AbstractType
                 'label'=>false,
                 'required'=>true,
                 'multiple'=>false,
-                'choices'=>$user->getAddresses(),
                 'expanded'=>true
 
                 ])
